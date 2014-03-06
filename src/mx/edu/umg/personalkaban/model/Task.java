@@ -2,14 +2,29 @@ package mx.edu.umg.personalkaban.model;
 
 import java.util.Date;
 
+/**
+ * Group of actions related to specific goal.
+ * 
+ * @author vjmorale
+ * 
+ */
 public class Task {
+	private String title;
 	private String description;
-	private int state;
-	private String category;
-	private int priority;
+	private State state;
+	private Category category;
+	private short priority;
 	private String owner;
 	private Date dueDate;
 	private Date createDate;
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	public String getDescription() {
 		return description;
@@ -19,27 +34,27 @@ public class Task {
 		this.description = description;
 	}
 
-	public int getState() {
+	public State getState() {
 		return state;
 	}
 
-	public void setState(int state) {
+	public void setState(State state) {
 		this.state = state;
 	}
 
-	public String getCategory() {
+	public Category getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 
-	public int getPriority() {
+	public short getPriority() {
 		return priority;
 	}
 
-	public void setPriority(int priority) {
+	public void setPriority(short priority) {
 		this.priority = priority;
 	}
 
