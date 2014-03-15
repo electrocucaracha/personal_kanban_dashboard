@@ -18,12 +18,19 @@ public class Task {
 	private Date dueDate;
 	private Date createDate;
 
+	public Task() {
+		super();
+		this.title = "";
+	}
+
 	public String getTitle() {
 		return title;
 	}
 
 	public void setTitle(String title) {
-		this.title = title;
+		if (title != null) {
+			this.title = title;
+		}
 	}
 
 	public String getDescription() {
@@ -81,4 +88,18 @@ public class Task {
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
+
+	public String toString() {
+		return this.title;
+	}
+
+	public boolean equals(Object obj) {
+		if (obj != null) {
+			if (obj instanceof Task) {
+				return title.equals(((Task) obj).getTitle());
+			}
+		}
+		return false;
+	}
+
 }
