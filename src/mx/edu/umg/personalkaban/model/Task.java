@@ -19,8 +19,23 @@ public class Task {
 	private Date createDate;
 
 	public Task() {
+		this("");
+		System.out.println("starting Task() ctor...");
+	}
+
+	public Task(String title) {
+		this(title, State.BACKLOG);
+		System.out.println("starting Task(String) ctor...");
+	}
+
+	public Task(String title, State state) {
 		super();
-		this.title = "";
+		System.out.println("starting Task(String, State) ctor...");
+		
+		this.title = title;
+		createDate = new Date();
+		priority = 1;
+		this.state = state;
 	}
 
 	public String getTitle() {
