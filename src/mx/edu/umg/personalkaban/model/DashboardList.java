@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-public class DashboardList extends DashboardAbstract implements List {
+public class DashboardList extends DashboardAbstract implements List<Task> {
 
 	public DashboardList() {
 		super();
@@ -13,12 +13,12 @@ public class DashboardList extends DashboardAbstract implements List {
 	}
 
 	@Override
-	public boolean add(Object e) {
+	public boolean add(Task e) {
 		return container.add(e);
 	}
 
 	@Override
-	public void add(int index, Object element) {
+	public void add(int index, Task element) {
 		container.add(index, element);
 	}
 
@@ -48,7 +48,7 @@ public class DashboardList extends DashboardAbstract implements List {
 	}
 
 	@Override
-	public Object get(int index) {
+	public Task get(int index) {
 		return container.get(index);
 	}
 
@@ -88,7 +88,7 @@ public class DashboardList extends DashboardAbstract implements List {
 	}
 
 	@Override
-	public Object remove(int index) {
+	public Task remove(int index) {
 		return container.remove(index);
 	}
 
@@ -103,7 +103,7 @@ public class DashboardList extends DashboardAbstract implements List {
 	}
 
 	@Override
-	public Object set(int index, Object element) {
+	public Task set(int index, Task element) {
 		return container.set(index, element);
 	}
 
