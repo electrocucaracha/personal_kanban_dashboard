@@ -2,6 +2,8 @@ package mx.edu.umg.personalkaban.model;
 
 import java.util.Date;
 
+import mx.edu.umg.personalkaban.Program;
+
 /**
  * Group of actions related to specific goal.
  * 
@@ -31,7 +33,7 @@ public class Task {
 	public Task(String title, State state) {
 		super();
 		System.out.println("starting Task(String, State) ctor...");
-		
+
 		this.title = title;
 		createDate = new Date();
 		priority = 1;
@@ -117,4 +119,13 @@ public class Task {
 		return false;
 	}
 
+	public boolean save() {
+		try {
+			Thread.sleep(1 * 1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return true;
+
+	}
 }
