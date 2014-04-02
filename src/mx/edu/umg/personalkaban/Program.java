@@ -1,11 +1,10 @@
 package mx.edu.umg.personalkaban;
 
 import java.util.Date;
+import java.util.Random;
 
 import mx.edu.umg.personalkaban.model.DashboardList;
 import mx.edu.umg.personalkaban.model.IDashboard;
-import mx.edu.umg.personalkaban.model.State;
-import mx.edu.umg.personalkaban.model.Task;
 
 public class Program {
 
@@ -13,15 +12,20 @@ public class Program {
 
 	public static void main(String[] args) throws Exception {
 		System.out.println("Start " + new Date());
-		
-		Task task;
+
+		Thread thread;
+		User user;
 		for (int i = 0; i < 15; i++) {
-			task = new Task("Task " + i, State.DO_TO);
-			if (task.save()) {
-				System.out.println("Saved " + task);
-			}
+			user = new User();
+			thread = new Thread(user);
+			
+			thread.setName("Title " + i);
+			int priority = 1 + (int) (Math.random() * ((10 - 1) + 1));
+			thread.setPriority(priority);
+
+			thread.start();
 		}
-		
+
 		System.out.println("End " + new Date());
 	}
 
