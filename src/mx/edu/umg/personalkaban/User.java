@@ -2,7 +2,7 @@ package mx.edu.umg.personalkaban;
 
 import mx.edu.umg.personalkaban.model.Task;
 
-public class User implements Runnable {
+public class User extends Thread{
 	public void run() {
 		String name = Thread.currentThread().getName();
 		int priority = Thread.currentThread().getPriority();

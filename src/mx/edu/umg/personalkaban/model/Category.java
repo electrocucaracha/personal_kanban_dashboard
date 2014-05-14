@@ -3,11 +3,12 @@ package mx.edu.umg.personalkaban.model;
 public class Category {
 	public String description;
 
-	public String getDescription() {
-		return description;
+	public Category(String description) {
+		super();
+		this.description = description;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public String getDescription() {
+		return description;
 	}
 }

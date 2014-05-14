@@ -1,1 +1,4 @@
 /bin
+*jpage
+students.txt
+/src/*.java

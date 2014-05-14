@@ -11,6 +11,9 @@ import mx.edu.umg.personalkaban.Program;
  * 
  */
 public class Task {
+
+	private final Object addSave = new Object();
+	
 	private String title;
 	private String description;
 	private State state;
@@ -128,14 +131,24 @@ public class Task {
 		}
 		return false;
 	}
+	
+	public boolean remove(){
+		//
+		synchronized(this){
+			return true;
+		}
+	}
 
 	public boolean save() {
-		try {
-			Thread.sleep(1 * 1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		return true;
 
+		//
+		synchronized (addSave){
+			try {
+				Thread.sleep(1 * 1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			return true;
+		}
 	}
 }
