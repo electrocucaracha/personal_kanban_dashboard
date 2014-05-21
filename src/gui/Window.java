@@ -22,8 +22,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.text.JTextComponent;
 
 import mx.edu.umg.personalkaban.Program;
+import mx.edu.umg.personalkaban.exceptions.EmptyComponentException;
 import mx.edu.umg.personalkaban.model.Category;
 import mx.edu.umg.personalkaban.model.State;
 import mx.edu.umg.personalkaban.model.Task;
@@ -58,50 +60,20 @@ public class Window extends JFrame {
 		txtDueDate.setText(new Date().toString());
 	}
 
-	private boolean verify() {
-		if ("".equalsIgnoreCase(txtTitle.getText().trim())) {
-			JOptionPane.showMessageDialog(null, "Title field is empty",
-					"Validation error", JOptionPane.ERROR_MESSAGE);
-			txtTitle.requestFocus();
-			return false;
+	private void isEmpty(String message, JTextComponent text)
+			throws EmptyComponentException {
+		if ("".equals(text.getText().trim())) {
+			throw new EmptyComponentException(message, text);
 		}
+	}
 
-		if ("".equalsIgnoreCase(txtDescription.getText().trim())) {
-			JOptionPane.showMessageDialog(null, "Description field is empty",
-					"Validation error", JOptionPane.ERROR_MESSAGE);
-			txtDescription.requestFocus();
-			return false;
-		}
-
-		if ("".equalsIgnoreCase(txtCategory.getText().trim())) {
-			JOptionPane.showMessageDialog(null, "Category field is empty",
-					"Validation error", JOptionPane.ERROR_MESSAGE);
-			txtDescription.requestFocus();
-			return false;
-		}
-
-		if ("".equalsIgnoreCase(txtPriority.getText().trim())) {
-			JOptionPane.showMessageDialog(null, "Priority field is empty",
-					"Validation error", JOptionPane.ERROR_MESSAGE);
-			txtPriority.requestFocus();
-			return false;
-		}
-
-		if ("".equalsIgnoreCase(txtOwner.getText().trim())) {
-			JOptionPane.showMessageDialog(null, "Owner field is empty",
-					"Validation error", JOptionPane.ERROR_MESSAGE);
-			txtOwner.requestFocus();
-			return false;
-		}
-
-		if ("".equalsIgnoreCase(txtDueDate.getText().trim())) {
-			JOptionPane.showMessageDialog(null, "Due date field is empty",
-					"Validation error", JOptionPane.ERROR_MESSAGE);
-			txtDueDate.requestFocus();
-			return false;
-		}
-
-		return true;
+	private void verify() throws Exception {
+		isEmpty("Title field is empty", txtTitle);
+		isEmpty("Description field is empty", txtDescription);
+		isEmpty("Category field is empty", txtCategory);
+		isEmpty("Priority field is empty", txtPriority);
+		isEmpty("Owner field is empty", txtOwner);
+		isEmpty("Due date field is empty", txtDueDate);
 	}
 
 	private boolean save() {
@@ -131,7 +103,8 @@ public class Window extends JFrame {
 			Object source = e.getSource();
 			if (source instanceof JButton) {
 				if (btnAdd == source) {
-					if (verify()) {
+					try {
+						verify();
 						if (JOptionPane.YES_OPTION == JOptionPane
 								.showConfirmDialog(null,
 										"Do you want to add this task?",
@@ -144,6 +117,14 @@ public class Window extends JFrame {
 								clean();
 							}
 						}
+					} catch (EmptyComponentException ex) {
+						JOptionPane.showMessageDialog(null, ex.getMessage(),
+								"Validation error", JOptionPane.ERROR_MESSAGE);
+						ex.getComponent().requestFocus();
+					} catch (Exception ex) {
+						JOptionPane.showMessageDialog(null, ex.getMessage(),
+								"Validation error", JOptionPane.ERROR_MESSAGE);
+
 					}
 				} else if (btnCancel == source) {
 					dispose();
