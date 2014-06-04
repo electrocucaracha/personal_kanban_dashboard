@@ -2,8 +2,6 @@ package mx.edu.umg.personalkaban.model;
 
 import java.util.Date;
 
-import mx.edu.umg.personalkaban.Program;
-
 /**
  * Group of actions related to specific goal.
  * 
@@ -13,7 +11,7 @@ import mx.edu.umg.personalkaban.Program;
 public class Task {
 
 	private final Object addSave = new Object();
-	
+
 	private String title;
 	private String description;
 	private State state;
@@ -123,6 +121,18 @@ public class Task {
 		return this.title;
 	}
 
+	public String toHtml() {
+		return "<table><tr><td>Title:</td><td>" + title + "</td></tr>"
+				+ "<tr><td>Description:</td><td>" + description + "</td></tr>"
+				+ "<tr><td>State:</td><td>" + state + "</td></tr>"
+				+ "<tr><td>Category:</td><td>" + category + "</td></tr>"
+				+ "<tr><td>Priority:</td><td>" + priority + "</td></tr>"
+				+ "<tr><td>Owner:</td><td>" + owner + "</td></tr>"
+				+ "<tr><td>Due Date:</td><td>" + dueDate + "</td></tr>"
+				+ "<tr><td>Create Date:</td><td>" + createDate
+				+ "</td></tr></table>";
+	}
+
 	public boolean equals(Object obj) {
 		if (obj != null) {
 			if (obj instanceof Task) {
@@ -131,10 +141,10 @@ public class Task {
 		}
 		return false;
 	}
-	
-	public boolean remove(){
+
+	public boolean remove() {
 		//
-		synchronized(this){
+		synchronized (this) {
 			return true;
 		}
 	}
@@ -142,7 +152,7 @@ public class Task {
 	public boolean save() {
 
 		//
-		synchronized (addSave){
+		synchronized (addSave) {
 			try {
 				Thread.sleep(1 * 1000);
 			} catch (InterruptedException e) {
